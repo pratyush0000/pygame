@@ -56,11 +56,11 @@ START_BUTTON = button.Button(WIDTH//2-START_IMG.get_width()//2,HEIGHT//2-START_I
 QUIT_IMG = pygame.transform.scale(pygame.image.load("Assets/quitbutton.png").convert_alpha(),(200,75))
 QUIT_BUTTON = button.Button(WIDTH//2 - QUIT_IMG.get_width()//2 , HEIGHT//2 + QUIT_IMG.get_height(),QUIT_IMG,1)
 
-YELLOW_SPACESHIP_IMAGE = pygame.image.load(os.path.join("spaceship","Assets","spaceship_yellow.png"))
+YELLOW_SPACESHIP_IMAGE = pygame.image.load(os.path.join("Assets","spaceship_yellow.png"))
 YELLOW_SPACESHIP = pygame.transform.rotate(pygame.transform.scale(YELLOW_SPACESHIP_IMAGE,(SPACESHIP_WIDTH, SPACESHIP_HEIGHT)),90)
-RED_SPACESHIP_IMAGE = pygame.image.load(os.path.join("spaceship","Assets","spaceship_red.png"))
+RED_SPACESHIP_IMAGE = pygame.image.load(os.path.join("Assets","spaceship_red.png"))
 RED_SPACESHIP = pygame.transform.rotate(pygame.transform.scale(RED_SPACESHIP_IMAGE,(SPACESHIP_WIDTH, SPACESHIP_HEIGHT)),270)
-SPACEBG = pygame.image.load(os.path.join("spaceship","Assets","spacebg.png"))
+SPACEBG = pygame.image.load(os.path.join("Assets","spacebg.png"))
 BG = pygame.transform.scale(SPACEBG,(WIDTH,HEIGHT))
 
 
