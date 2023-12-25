@@ -144,23 +144,38 @@ def red_movement(key, red):
         red.x += VEL
 
 
-def handle_bullets(yellow_bullets,red_bullets,yellow,red):
-    for bullet in yellow_bullets:
-        bullet.x +=BULLET_VEL
-        if red.colliderect(bullet):
+def handle_bullets(yellow_bullets, red_bullets, yellow, red):
+    for bulletyellow in yellow_bullets:
+        bulletyellow.x += BULLET_VEL
+        if red.colliderect(bulletyellow):
             pygame.event.post(pygame.event.Event(RED_HIT))
-            yellow_bullets.remove(bullet)
-        elif bullet.x >WIDTH:
-            yellow_bullets.remove(bullet)
+            yellow_bullets.remove(bulletyellow)
+        elif bulletyellow.x > WIDTH:
+            yellow_bullets.remove(bulletyellow)
 
-    for bullet in red_bullets:
-        bullet.x -=BULLET_VEL
-        if yellow.colliderect(bullet):
+    for bulletred in red_bullets:
+        bulletred.x -= BULLET_VEL
+        if yellow.colliderect(bulletred):
             pygame.event.post(pygame.event.Event(YELLOW_HIT))
-            red_bullets.remove(bullet)
-        elif bullet.x < 0:
-            red_bullets.remove(bullet)
+            red_bullets.remove(bulletred)
+        elif bulletred.x < 0:
+            red_bullets.remove(bulletred)
 
+    # Check for collisions between yellow bullets and red bullets
+    for bulletyellow in yellow_bullets:
+        for bulletred in red_bullets:
+            if bulletyellow.colliderect(bulletred):
+                yellow_bullets.remove(bulletyellow)
+                red_bullets.remove(bulletred)
+                BULLET_HIT_SOUND.play()
+
+    # Check for collisions between red bullets and yellow bullets
+    for bulletred in red_bullets:
+        for bulletyellow in yellow_bullets:
+            if bulletred.colliderect(bulletyellow):
+                red_bullets.remove(bulletred)
+                yellow_bullets.remove(bulletyellow)
+                BULLET_HIT_SOUND.play()
 
 def draw_winner(text):
     # pygame.time.delay(5000)
@@ -229,12 +244,12 @@ def main():
 
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_LCTRL and len(yellow_bullets) < MAX_BULLETS:
-                    bullet = pygame.Rect(yellow.x+yellow.height , yellow.y + yellow.width//2 - 2 ,10,5)
-                    yellow_bullets.append(bullet)
+                    bulletyellow = pygame.Rect(yellow.x+yellow.height , yellow.y + yellow.width//2 - 2 ,10,5)
+                    yellow_bullets.append(bulletyellow)
                     BULLET__FIRE_SOUND.play()
                 if event.key == pygame.K_RCTRL and len(red_bullets) < MAX_BULLETS:
-                    bullet = pygame.Rect(red.x , red.y + red.width//2 - 2 ,10,5)
-                    red_bullets.append(bullet)
+                    bulletred = pygame.Rect(red.x , red.y + red.width//2 - 2 ,10,5)
+                    red_bullets.append(bulletred)
                     BULLET__FIRE_SOUND.play()
 
             if event.type == RED_HIT:
@@ -268,4 +283,4 @@ def main():
 
 
 if __name__ == "__main__":
-    start()  
+    start()  # Start the application
