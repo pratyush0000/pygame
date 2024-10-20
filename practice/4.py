@@ -46,9 +46,9 @@ def red_handle_movement(keys_pressed,red):
         red.x-=VEL
     if keys_pressed[pygame.K_RIGHT] and red.x + VEL + SPACESHIP_HEIGHT < WIDTH: 
         red.x+=VEL
-    if keys_pressed[pygame.K_UP]:
+    if keys_pressed[pygame.K_UP] and red.y + VEL > 5:
         red.y-=VEL
-    if keys_pressed[pygame.K_DOWN]: 
+    if keys_pressed[pygame.K_DOWN] and red.y + VEL + red.width < HEIGHT:
         red.y+=VEL
 
 def main():
