@@ -118,7 +118,7 @@ def main():
         handle_bullets(yellow_bullets,red_bullets,yellow,red)
 
         #yellow.x+=1 #to show it moving
-        drawwindow(red,yellow,yellow_bullets,red_bullets) #new
+        drawwindow(red,yellow,yellow_bullets,red_bullets)
 
     pygame.quit()
 

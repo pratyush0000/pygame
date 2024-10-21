@@ -2,6 +2,7 @@
 
 import pygame
 import os
+pygame.font.init() #new
 
 WIDTH,HEIGHT=900,500
 WIN=pygame.display.set_mode((WIDTH,HEIGHT))
@@ -21,6 +22,8 @@ SPACESHIP_HEIGHT=35
 FPS = 60
 CENTRE_LINE=pygame.Rect(WIDTH/2-5,0,10,HEIGHT)
 
+HEALTH_FONT=pygame.font.SysFont('comicsans',40) #new
+
 YELLOW_HIT=pygame.USEREVENT + 1
 RED_HIT=pygame.USEREVENT + 2
 
@@ -31,9 +34,17 @@ RED_SPACESHIP_IMG= pygame.image.load('practice/assets/spaceship_red.png') #red s
 RED_SPACESHIP = pygame.transform.rotate(pygame.transform.scale(RED_SPACESHIP_IMG,(SPACESHIP_WIDTH,SPACESHIP_HEIGHT)),270) 
 SPACEBG = pygame.image.load(os.path.join("practice","Assets","spacebg.png"))
 
-def drawwindow(red,yellow,yellow_bullets,red_bullets):
+def drawwindow(red,yellow,yellow_bullets,red_bullets,yellow_health,red_health):
     WIN.blit(SPACEBG,(0,0))
     pygame.draw.rect(WIN,BLACK,CENTRE_LINE)
+
+    yellow_health_text=HEALTH_FONT.render("Health: "+str(yellow_health),1,WHITE)#new
+    red_health_text=HEALTH_FONT.render("Health: "+str(red_health),1,WHITE)#new
+    WIN.blit(yellow_health_text,(10,10))#new
+    WIN.blit(red_health_text,(WIDTH-red_health_text.get_width()-10,10))#new
+    
+
+
     WIN.blit(YELLOW_SPACESHIP,(yellow.x,yellow.y)) 
     WIN.blit(RED_SPACESHIP,(red.x,red.y))
 
@@ -133,7 +144,7 @@ def main():
         handle_bullets(yellow_bullets,red_bullets,yellow,red)
 
         #yellow.x+=1 #to show it moving
-        drawwindow(red,yellow,yellow_bullets,red_bullets) #new
+        drawwindow(red,yellow,yellow_bullets,red_bullets,yellow_health,red_health) #new
 
     pygame.quit()
 
